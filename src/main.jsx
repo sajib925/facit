@@ -6,6 +6,7 @@ import {GlobalStyled} from "./styles/globalStyled";
 import { Login } from './pages/login/login';
 import { SignUp } from './pages/signUp/signUp';
 import { Dashboard } from './pages/dashboard/dashboard';
+import PrivateRoute from "./hooks/privateRoute";
 
 ReactDOM.createRoot(document.getElementById("root")).render(
   <>
@@ -13,8 +14,15 @@ ReactDOM.createRoot(document.getElementById("root")).render(
     <BrowserRouter>
       <Routes>
         <Route path="/" element={<App />}>
-          <Route index element={<Login />} />
-          <Route path="dashboard" element={<Dashboard />} />
+          <Route
+            index
+            element={
+              <PrivateRoute>
+                <Dashboard />
+              </PrivateRoute>
+            }
+          />
+            <Route path="login" element={<Login />} />
           <Route path="signUp" element={<SignUp />} />
         </Route>
       </Routes>
